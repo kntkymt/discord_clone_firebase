@@ -1,0 +1,31 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /versions/1 {
+      match /channels/{channelId} {
+        allow read: if isAuthenticated();
+      }
+
+      match /servers/{serverId} {
+        allow read: if isAuthenticated();
+      }
+
+      match /messages/{messageId} {
+        allow read, create, update: if isAuthenticated();
+      }
+
+      match /users/{userId} {
+        allow read, create: if isAuthenticated();
+        allow delete, update: if isMine(userId);
+      }
+
+    }
+  }
+
+  function isMine(userId) {
+    return isAuthenticated() && request.auth.uid == userId;
+  }
+
+  function isAuthenticated() {
+    return request.auth != null;
+  }
+}

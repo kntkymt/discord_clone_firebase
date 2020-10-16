@@ -1,0 +1,15 @@
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /userFiles/{fileId} {
+      allow read, create: if isAuthenticated();
+    }
+
+    match /userIcons/{fileId} {
+      allow read, create: if isAuthenticated();
+    }
+  }
+
+  function isAuthenticated() {
+    return request.auth != null;
+  }
+}
