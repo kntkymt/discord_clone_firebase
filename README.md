@@ -6,9 +6,7 @@
 
 ## Demo
 
-https://discord-clone-36c89.web.app/
-
-※ ユーザー名の入力が求められますが、「test」等を入力していただければ大丈夫です。
+Discordに似せたフィッシングサイトと判定されたため停止中
 
 ## Setup
 
